@@ -5,23 +5,23 @@ import NewPlantForm from "./NewPlantForm";
 import Search from "./Search";
 
 function PlantList() {
-  const [plants, setPlant] = useState([]);
+  const [plants, setPlants] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
       .then((r) => {
         if (!r.ok) {
-          throw new Error("Failed to fetch");
+          throw new Error("Failed to fetch plants");
         }
         return r.json();
       })
-      .then((plants) => setPlant(plants))
+      .then((plants) => setPlants(plants))
       .catch((err) => console.log(err));
   }, []);
 
   function handleAddPlant(newPlant) {
-    setPlant((prevPlant) => [...prevPlant, newPlant]);
+    setPlants((prevPlants) => [...prevPlants, newPlant]);
   }
 
   const filteredPlants = plants.filter((plant) =>
@@ -36,7 +36,7 @@ function PlantList() {
 
       <ul className="cards">
         {filteredPlants.map((plant) => (
-          <PlantCard key={plant.id} plants={plant} />
+          <PlantCard key={plant.id} plant={plant} />
         ))}
       </ul>
     </>
