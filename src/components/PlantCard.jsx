@@ -1,14 +1,16 @@
 
 import React, { useState } from "react";
 
-function PlantCard({ plants }) {
+function PlantCard({ plant }) {
   const [isSoldOut, setIsSoldOut] = useState(false);
 
   return (
     <li className="card" data-testid="plant-item">
-      <img src={plants.image} alt={plants.name} />
-      <h4>{plants.name}</h4>
-      <p>Price: {plants.price}</p>
+      <img src={plant.image} alt={plant.name} />
+
+      <h4>{plant.name}</h4>
+
+      <p>Price: {plant.price}</p>
 
       {isSoldOut ? (
         <button onClick={() => setIsSoldOut(false)}>
